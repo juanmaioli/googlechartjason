@@ -26,79 +26,79 @@
         </div>
 
     </body>
-<script type="text/javascript">
-//Line Chart
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-    var valores_v = setInterval(drawChart, 6000);  //Intervalo de consulta de los datos
-    function drawChart() {        
-        fetch('data.json') //Origen de los datos, puede ser dinamico desde PHP u otro lenguaje
-        .then(datos=>datos.json())
-        .then(datos=>{
-            var data = new google.visualization.DataTable();
-            data.addColumn('string',   'Fecha');
-            data.addColumn('number',   'Temp Cº');
-            
-            for(let dato of datos){
-                var fechaD = dato.fecha;
-                var tempD = parseFloat(dato.temp);
-                fechaD = fechaD.toString();
+
+    <script type="text/javascript">
+    //Line Chart
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        var valores_v = setInterval(drawChart, 6000);  //Intervalo de consulta de los datos
+        function drawChart() {        
+            fetch('data.json') //Origen de los datos, puede ser dinamico desde PHP u otro lenguaje
+            .then(datos=>datos.json())
+            .then(datos=>{
+                var data = new google.visualization.DataTable();
+                data.addColumn('string',   'Fecha');
+                data.addColumn('number',   'Temp Cº');
                 
-                data.addRow([fechaD, tempD]);               
-            }
-        var options = {
-            title: 'Temperatura',
-            'chartArea': {'width': '90%', 'height': '80%'},
-            curveType: 'function',
-            legend: { position: 'bottom' }, 
-            pointSize: 5, 
-            series: {
-                0: { pointShape: 'diamond' },
-                1: { pointShape: 'triangle' },
-                2: { pointShape: 'square' },
-                3: { pointShape: 'circle' },
-                4: { pointShape: 'star' },
-                5: { pointShape: 'polygon' } 
-                 }
-            };
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-        chart.draw(data, options);
-        })
-    }
-  </script>
+                for(let dato of datos){
+                    var fechaD = dato.fecha;
+                    var tempD = parseFloat(dato.temp);
+                    fechaD = fechaD.toString();
+                    
+                    data.addRow([fechaD, tempD]);               
+                }
+            var options = {
+                title: 'Temperatura',
+                'chartArea': {'width': '90%', 'height': '80%'},
+                curveType: 'function',
+                legend: { position: 'bottom' }, 
+                pointSize: 5, 
+                series: {
+                    0: { pointShape: 'diamond' },
+                    1: { pointShape: 'triangle' },
+                    2: { pointShape: 'square' },
+                    3: { pointShape: 'circle' },
+                    4: { pointShape: 'star' },
+                    5: { pointShape: 'polygon' } 
+                    }
+                };
+            var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+            chart.draw(data, options);
+            })
+        }
+    </script>
 
-
-<script type="text/javascript">
-//Grafico tipo Sparkline
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-    var valores_v = setInterval(drawChart, 6000); //Intervalo de consulta de los datos
-    function drawChart() {        
-        fetch('data.json') //Origen de los datos, puede ser dinamico desde PHP u otro lenguaje
-        .then(datos=>datos.json())
-        .then(datos=>{
-            var data = new google.visualization.DataTable();
-            data.addColumn('string',   'Fecha');
-            data.addColumn('number',   'Temp Cº');           
-            for(let dato of datos){
-                var fechaD = dato.fecha;
-                var precioD = parseFloat(dato.temp);
-                fechaD = fechaD.toString();
-                data.addRow([fechaD, precioD]);               
-            }
-        var options = {
-            legend: { position: 'none' }, 
-            vAxis: {gridlines: {count: 0},textPosition: 'none', baselineColor: '#FFFFFF'},
-            hAxis: {gridlines: {count: 0},textPosition: 'none', baselineColor: '#FFFFFF'},
-            enableInteractivity: false,
-            width: '100%', 
-            height: '100%'
-            };
-        var chart = new google.visualization.LineChart(document.getElementById('sparkline'));
-        chart.draw(data, options);
-        })
-    }
-  </script>
+    <script type="text/javascript">
+    //Grafico tipo Sparkline
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        var valores_v = setInterval(drawChart, 6000); //Intervalo de consulta de los datos
+        function drawChart() {        
+            fetch('data.json') //Origen de los datos, puede ser dinamico desde PHP u otro lenguaje
+            .then(datos=>datos.json())
+            .then(datos=>{
+                var data = new google.visualization.DataTable();
+                data.addColumn('string',   'Fecha');
+                data.addColumn('number',   'Temp Cº');           
+                for(let dato of datos){
+                    var fechaD = dato.fecha;
+                    var precioD = parseFloat(dato.temp);
+                    fechaD = fechaD.toString();
+                    data.addRow([fechaD, precioD]);               
+                }
+            var options = {
+                legend: { position: 'none' }, 
+                vAxis: {gridlines: {count: 0},textPosition: 'none', baselineColor: '#FFFFFF'},
+                hAxis: {gridlines: {count: 0},textPosition: 'none', baselineColor: '#FFFFFF'},
+                enableInteractivity: false,
+                width: '100%', 
+                height: '100%'
+                };
+            var chart = new google.visualization.LineChart(document.getElementById('sparkline'));
+            chart.draw(data, options);
+            })
+        }
+    </script>
 </html>
 
 
